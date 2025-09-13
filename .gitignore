@@ -35,3 +35,4 @@ Thumbs.db
 
 # Other
 coverage/
+/generated/prisma
