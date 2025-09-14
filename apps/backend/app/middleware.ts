@@ -1,9 +1,9 @@
 import jwt from "jsonwebtoken";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
 const JWT_SECRET = process.env.JWT_SECRET as string;
 
-export async function POST(req: Request) {
+export default async function POST(req: NextRequest) {
   const authHeader = req.headers.get("authorization");
   const token = authHeader?.split(" ")[1];
 
@@ -16,7 +16,7 @@ export async function POST(req: Request) {
 
   try {
     const decoded = jwt.verify(token, JWT_SECRET);
-    return NextResponse.json({ message: "Token valid", decoded });
+    return NextResponse.next()
   } catch (e) {
     return NextResponse.json(
       { message: "Token not valid" },
@@ -25,3 +25,6 @@ export async function POST(req: Request) {
   }
 }
 
+export const config = {
+  matche: ['/api/me']
+}
