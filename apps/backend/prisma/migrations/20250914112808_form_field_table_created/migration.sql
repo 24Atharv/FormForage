@@ -10,4 +10,4 @@ CREATE TABLE "public"."FormField" (
 );
 
 -- AddForeignKey
-ALTER TABLE "public"."FormField" ADD CONSTRAINT "FormField_formId_fkey" FOREIGN KEY ("formId") REFERENCES "public"."Forms"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "public"."FormField" ADD CONSTRAINT "FormField_formId_fkey" FOREIGN KEY ("formId") REFERENCES "public"."Form"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

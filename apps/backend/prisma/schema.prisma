@@ -14,49 +14,51 @@ datasource db {
 }
 
 model User {
-  id Int @id@default(autoincrement())
-  name String
-  email String @unique
-  password String
-  provider String @default("free")
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String   @unique
+  password  String
+  provider  String   @default("free")
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now())
 
   forms Form[]
+
   responses Response[]
 }
 
 model Form {
-  id Int @id@default(autoincrement())
-  title String
+  id          Int    @id @default(autoincrement())
+  title       String
   description String
 
   ownerId Int
-  owner User @relation(fields: [ownerId], references: [id])
+  owner   User @relation(fields: [ownerId], references: [id])
 
   fields FormField[]
+
   responses Response[]
 }
 
 model FormField {
-  id Int @id@default(autoincrement())
-  label String
-  type String
+  id       Int     @id @default(autoincrement())
+  label    String
+  type     String
   required Boolean @default(false)
-  
+
   formId Int
-  form Form @relation(fields: [formId], references: [id])
+  form   Form @relation(fields: [formId], references: [id])
 
   answers ResponseAnswer[]
 }
 
 model Response {
-  id Int @id@default(autoincrement())
+  id Int @id @default(autoincrement())
 
   formId Int
-  form Form @relation(fields: [formId], references: [id])
+  form   Form @relation(fields: [formId], references: [id])
 
-  user User @relation(fields: [submittedBy], references: [id])
+  user        User @relation(fields: [submittedBy], references: [id])
   submittedBy Int
 
   submittedAt DateTime @default(now())
@@ -68,10 +70,10 @@ model ResponseAnswer {
   id Int @id @default(autoincrement())
 
   responseId Int
-  response Response @relation(fields: [responseId], references: [id])
+  response   Response @relation(fields: [responseId], references: [id])
 
   fieldId Int
-  field FormField @relation(fields: [fieldId], references: [id])
+  field   FormField @relation(fields: [fieldId], references: [id])
 
   value String
 }

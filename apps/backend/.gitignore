@@ -36,3 +36,5 @@ Thumbs.db
 # Other
 coverage/
 /generated/prisma
+
+/src/generated/prisma
